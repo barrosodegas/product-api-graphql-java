@@ -12,6 +12,28 @@
 - query { products { productId name } }
 - query { products { productId name inventory { warehouses { locality quantity } } } }
 
-- mutation { createProduct(product: { properties... } ) { name } } 
-- mutation { updateProduct(product: { properties... } ) {} } 
-- mutation { createProduct(product: { properties... } ) {} } 
+- mutation {
+  createProduct(
+    product: {
+      sku: 12345678
+      name: "Creme 2"
+      inventory: {
+        warehouses: [{ locality: "ES", quantity: 10, type: PHYSICAL_STORE }]
+      }
+    }
+  ) {
+    productId
+    name
+  }
+}
+
+- mutation {
+  updateProduct (product: {
+      sku: 12345678
+      name: "Creme 6"
+  })
+}
+
+- mutation {
+  removeProductById(productId: 1)
+}
